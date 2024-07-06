@@ -34,11 +34,35 @@ const booksByCategory = [
     }
     ]
     }
-    ];
+];
 
-var num_cat = 0;
-var num_livros = 0;
-var l = []
-for (let i = 0; i < booksByCategory.length; i++){
-    
+function mostraLivrosAutor (autor){
+    var l = [];
+    for (let i = 0; i < booksByCategory.length; i++){
+        for (let j = 0; j < booksByCategory[i].books.length; j++){
+            if (booksByCategory[i].books[j].author == autor) l.push(booksByCategory[i].books[j].title);
+        }
+    }
+    return l;
 }
+
+var num_cat = booksByCategory.length;
+var num_livros_por_cat = [];
+var l_autores = [];
+
+for (let i = 0; i < booksByCategory.length; i++){
+    let l = [];
+    l.push(booksByCategory[i].category);
+    l.push(booksByCategory[i].books.length);
+    num_livros_por_cat.push(l);
+    for (let j = 0; j < booksByCategory[i].books.length; j++){
+        if (!l_autores.includes(booksByCategory[i].books[j].author))l_autores.push(booksByCategory[i].books[j].author);
+    }
+}
+
+
+
+console.log(`Numero de categorias = ${num_cat}`);
+console.log(`Numero de livros em cada categoria = ${num_livros_por_cat}`);
+console.log(`Numero de autores = ${l_autores.length}`);
+console.log(`Livros do Augusto Cury = ${mostraLivrosAutor("Augusto Cury")}`);
